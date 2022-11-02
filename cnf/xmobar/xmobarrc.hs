@@ -2,7 +2,7 @@ Config {
 
    -- appearance
      font =         "xft:Fira Code:pixelsize=16:antialias=true:hinting=true" -- "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
-   , bgColor =      "black"
+   , bgColor =      "#2B2E37"
    , fgColor =      "#646464"
    , position =     Top
    , border =       NoBorder -- BottomB
@@ -11,7 +11,8 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }<fc=#ff000f>my xmobar</fc>{ %RJTT% | %date% || %kbd% "
+   -- , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }<fc=#ff000f>my xmobar</fc>{ %RJTT% | %date% || %kbd% "
+   , template = "%battery% %multicpu% %coretemp% %memory% %dynnetwork% }<fc=#ff000f>my xmobar</fc>{ %RJTT% %date% | %kbd% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -85,8 +86,7 @@ Config {
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkgreen"
 
-                             , "--" -- battery specific options
-                                       -- discharging status
+                             , "--" -- battery specific options discharging status
                                        , "-o"	, "<left>% (<timeleft>)"
                                        -- AC "on" status
                                        , "-O"	, "<fc=#dAA520>Charging</fc>"

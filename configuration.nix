@@ -239,6 +239,7 @@ in
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         config = "sudo -e /etc/nixos/configuration.nix";
+        nixpkgs = "cd ~/.config/nixpkgs"
       };
       initExtra = ''
         bindkey -e
