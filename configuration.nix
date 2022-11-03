@@ -239,7 +239,8 @@ in
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         config = "sudo -e /etc/nixos/configuration.nix";
-        nixpkgs = "cd ~/.config/nixpkgs"
+        nixpkgs = "cd ~/.config/nixpkgs";
+        open = "thunar";
       };
       initExtra = ''
         bindkey -e
