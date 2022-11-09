@@ -65,7 +65,7 @@ in
         enable = true;
         enableContribAndExtras = true;
         extraPackages = haskellPackages: [
-          # haskellPackages.dbus
+          haskellPackages.dbus
           haskellPackages.List
           haskellPackages.monad-logger
           haskellPackages.xmonad
@@ -125,42 +125,59 @@ in
   # $ nix search wget
   environment.variables.EDITOR = "nvim";
   environment.systemPackages = with pkgs; [
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     gcc
-     deno
-     nodejs
-     git
-     gh
-     helix
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    gcc
+    deno
+    nodejs
+    git
+    gh
+    helix
 
-     # For The xmonad
-     xterm
-     gmrun
-     dmenu
-     wezterm
+    # For The xmonad
+    xterm
+    gmrun
+    dmenu
+    wezterm
+    alacritty
+    kitty
 
-     #inputMethod
-     ## for fcitx5
-     # fcitx5-lua
-     # fcitx5-gtk
-     # fcitx5-mozc
+    #inputMethod
+    ## for fcitx5
+    # fcitx5-lua
+    # fcitx5-gtk
+    # fcitx5-mozc
 
-     # File manager
-     xfce.thunar
+    # File manager
+    xfce.thunar
 
-     #PDF reader
-     okular
+    # PDF reader
+    okular
 
-     # A minimalistic Text Based Status Bar
-     haskellPackages.xmobar
+    # A minimalistic Text Based Status Bar
+    haskellPackages.xmobar
 
-     # For Haskell
-     haskellPackages.haskell-language-server
-     haskellPackages.hoogle
-     haskellPackages.gtk2hs-buildtools
-     cabal-install
-     stack
+    # Latex
+    texlive.combined.scheme-full
+
+    (let
+      my-python-packages = python-packages: with python-packages; [
+        pandas
+        requests
+      #other python packages you want
+      ];
+      python-with-my-packages = python3.withPackages my-python-packages;
+    in
+    python-with-my-packages)
+
+
+    # Haskell
+    # haskellPackages.haskell-language-server
+    haskellPackages.hoogle
+    haskellPackages.gtk2hs-buildtools
+    # haskellPackages.ghcup
+    # cabal-install
+    # stack
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
