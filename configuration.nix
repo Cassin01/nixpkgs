@@ -54,6 +54,9 @@ in
   services.xserver.displayManager.sddm.enable = false;
   services.xserver.desktopManager.plasma5.enable = false;
 
+  # https://github.com/NixOS/nixpkgs/issues/80936#issuecomment-1003784682
+  services.xserver.videoDrivers = ["nvidia"];
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -194,6 +197,7 @@ in
     carlito
     dejavu_fonts
     ipafont
+    ipaexfont
     kochi-substitute
     source-code-pro
     ttf_bitstream_vera
@@ -258,6 +262,7 @@ in
         config = "sudo -e /etc/nixos/configuration.nix";
         nixpkgs = "cd ~/.config/nixpkgs";
         open = "thunar";
+        alac = "LIBGL_ALWAYS_SOFTWARE=1 alacritty";
       };
       initExtra = ''
         bindkey -e
