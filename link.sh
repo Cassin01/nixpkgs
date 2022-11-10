@@ -10,4 +10,4 @@ set -e -o pipefail
 # cp -r ~/.config/xmonad ~/.config/nixpkgs/cnf/
 # ln -sf ~/configuration.nix /etc/nixos/configuration.nix
 ln -sf ~/.config/nixpkgs/cnf/xmobar/xmobarrc.hs ~/.config/xmobar/xmobarrc.hs
-ln -sf ~/.config/nixpkgs/cnf/xmobad/xmobad.hs ~/.config/xmonad/xmonad.hs
+ln -sf ~/.config/nixpkgs/cnf/xmonad/xmonad.hs ~/.config/xmonad/xmonad.hs

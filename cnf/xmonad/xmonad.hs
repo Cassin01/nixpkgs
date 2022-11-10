@@ -232,7 +232,7 @@ myManageHook = composeAll
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 -- myEventHook = mempty
-myEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "Kitty" <||> className =? "XTerm") (return True)
+myEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "kitty" <||> className =? "XTerm") (return True)
 
 ------------------------------------------------------------------------
 -- Status bars and logging
