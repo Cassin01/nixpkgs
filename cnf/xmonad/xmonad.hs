@@ -13,6 +13,7 @@ import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+import XMonad.Hooks.WindowSwallowing
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -230,7 +231,8 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+-- myEventHook = mempty
+myEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "Kitty" <||> className =? "XTerm") (return True)
 
 ------------------------------------------------------------------------
 -- Status bars and logging

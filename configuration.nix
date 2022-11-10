@@ -38,11 +38,6 @@ in
 
   # Set Input Method!
   i18n.inputMethod = {
-    # enabled = "fcitx5";
-    # fcitx5.addons = with pkgs; [
-    #   fcitx5-mozc
-    #   fcitx5-chinese-addons
-    # ];
     enabled = "fcitx";
     fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
@@ -55,7 +50,7 @@ in
   services.xserver.desktopManager.plasma5.enable = false;
 
   # https://github.com/NixOS/nixpkgs/issues/80936#issuecomment-1003784682
-  services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.videoDrivers = ["nvidia"];
 
   # Configure keymap in X11
   services.xserver = {
@@ -137,19 +132,14 @@ in
     gh
     helix
 
+    starship # shell prompt
+
     # For The xmonad
     xterm
     gmrun
     dmenu
-    wezterm
     alacritty
     kitty
-
-    #inputMethod
-    ## for fcitx5
-    # fcitx5-lua
-    # fcitx5-gtk
-    # fcitx5-mozc
 
     # File manager
     xfce.thunar
@@ -163,6 +153,7 @@ in
     # Latex
     texlive.combined.scheme-full
 
+    # Python
     (let
       my-python-packages = python-packages: with python-packages; [
         pandas
@@ -173,6 +164,9 @@ in
     in
     python-with-my-packages)
 
+    # Rust
+    rustup
+    cargo
 
     # Haskell
     # haskellPackages.haskell-language-server
@@ -262,13 +256,16 @@ in
         config = "sudo -e /etc/nixos/configuration.nix";
         nixpkgs = "cd ~/.config/nixpkgs";
         open = "thunar";
-        alac = "LIBGL_ALWAYS_SOFTWARE=1 alacritty";
+        alac = "LIBGL_ALWAYS_SOFTWARE=1 alacritty"; #XXX alacritty
+        kitt = "LIBGL_ALWAYS_SOFTWARE=true GALLIUM_DRIVER=llvmpipe kitty"; #XXX kitty
       };
       initExtra = ''
         bindkey -e
         export XMODIFIERS=@im=fcitx
         export GTK_IM_MODULE=fcitx
         export QT_IM_MODULE=fcitx
+
+        eval "$(starship init zsh)" # Setup my shell to use Starship
       '';
       history = {
         size = 10000;
@@ -278,7 +275,7 @@ in
         enable = true;
         plugins = [
           { name = "zsh-users/zsh-autosuggestions"; }
-          { name = "romkatv/powerlevel10k"; }
+          # { name = "romkatv/powerlevel10k"; }
         ];
       };
     };
