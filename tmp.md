@@ -1,3 +1,28 @@
+When I try to open a gui app, I always face this error message(NixOS on (VirutalBox on OSX)).
+
+
+```sh
+$ libreoffice
+Gtk-Message: 17:41:41.774: Failed to load module "colorreload-gtk-module"
+```
+
+or
+
+```sh
+$ firefox          
+Gtk-Message: 17:42:07.764: Failed to load module "colorreload-gtk-module"
+```
+
+
+# Version Info
+## nixos
+
+WM: xmonad
+
+<details>
+    <summary>configuration.nix</summary>
+
+```nix
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -304,3 +329,45 @@ in
     };
   };
 }
+```
+
+</details>
+## VirtualBox
+
+```
+$ vertualbox -h
+Oracle VM VirtualBox VM Selector v6.1.38
+(C) 2005-2022 Oracle Corporation
+All rights reserved.
+```
+
+## OSX(HOST)
+
+```sh
+$ sw_vers
+ProductName:	macOS
+ProductVersion:	12.6
+BuildVersion:	21G11
+```
+
+### gpu info
+```sh
+$ sudo powermetrics --samplers gpu_power -i500 -n1
+Machine model: MacBookPro15,2
+SMC version: Unknown
+EFI version: 1731.2.0
+OS version: 21G115
+Boot arguments: chunklist-security-epoch=0 -chunklist-no-rev2-dev chunklist-security-epoch=0 -chunklist-no-rev2-dev
+Boot time: Thu Nov 10 23:09:43 2022
+
+
+
+*** Sampled system activity (Tue Nov 15 17:54:02 2022 +0900) (500.57ms elapsed) ***
+
+
+**** GPU usage ****
+
+GPU 0 name IntelIG
+```
+
+
