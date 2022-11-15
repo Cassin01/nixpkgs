@@ -118,6 +118,7 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowBroken = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -130,9 +131,20 @@ in
     nodejs
     git
     gh
-    helix
+    # helix
+
+    # Essential commands
+    zip
+    unzip
+    file # Show the type of files
 
     starship # shell prompt
+
+    # Browser
+    qutebrowser
+
+    #FIXME I dont know whether if this gtk's work.
+    gtk4
 
     # For The xmonad
     xterm
@@ -141,11 +153,17 @@ in
     alacritty
     kitty
 
+    # CTF
+    radare2 # Reverse engineering framework
+
     # File manager
     xfce.thunar
 
     # PDF reader
     okular
+
+    # office app
+    libreoffice
 
     # A minimalistic Text Based Status Bar
     haskellPackages.xmobar
