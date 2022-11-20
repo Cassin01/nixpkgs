@@ -160,6 +160,23 @@ in
 
     # CTF
     radare2 # Reverse engineering framework
+    binutils # (i.e. strings, (extract strings from a binary file))
+    ghidra # A software reverse engineering
+    gdb
+    gdbgui
+
+    ## build 32bit programs
+    gcc_multi
+    glibc_multi
+    # gccMultiStdenv
+    # python2
+    # pkgconfig
+    # pkgsi686Linux.glibc
+    # # pkgsi686Linux.ffmpeg_2_2
+    # pkgsi686Linux.boost155
+    # pkgsi686Linux.openssl
+    # pkgsi686Linux.curl
+    # pkgsi686Linux.opencv
 
     # File manager
     xfce.thunar
@@ -181,6 +198,7 @@ in
       my-python-packages = python-packages: with python-packages; [
         pandas
         requests
+        numpy
       #other python packages you want
       ];
       python-with-my-packages = python3.withPackages my-python-packages;
@@ -190,6 +208,7 @@ in
     # Rust
     rustup
     cargo
+    rust-analyzer
 
     # Haskell
     # haskellPackages.haskell-language-server
@@ -265,6 +284,7 @@ in
 
     home.packages = [
       pkgs.zsh
+      pkgs.exa
     ];
 
     programs.zsh = {
@@ -274,7 +294,12 @@ in
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
       shellAliases = {
-        ll = "ls -l";
+        # ll = "ls -l";
+        ls = "${pkgs.exa}/bin/exa";
+        ll = "${pkgs.exa}/bin/exa -l";
+        la = "${pkgs.exa}/bin/exa -a";
+        lt = "${pkgs.exa}/bin/exa --tree";
+        lla = "${pkgs.exa}/bin/exa -la";
         update = "sudo nixos-rebuild switch";
         config = "sudo -e /etc/nixos/configuration.nix";
         nixpkgs = "cd ~/.config/nixpkgs";
