@@ -29,9 +29,9 @@ function peco_alias() {
   __i=$((${__i}+1))
   __comments[${__i}]="gen a repo and pull by the ghq"
   function __callback${__i}() {
-    /bin/echo -n "Input repo name: "
+    ${_echo} -n "Input repo name: "
     read repo_name
-    /bin/echo -n "Input repo desc: "
+    ${_echo} -n "Input repo desc: "
     read repo_desc
     gh repo create ${repo_name} --private -d "${repo_desc}"
     ghq get ${repo_name}
