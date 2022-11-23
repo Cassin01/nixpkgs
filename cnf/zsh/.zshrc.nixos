@@ -1,15 +1,12 @@
 #!/run/current-system/sw/bin/zsh
 set -euo pipefail
 
-autoload catch
-autoload throw
-
 function peco_alias() {
   typeset -a __comments
   local __i=0
+  local _echo="/run/current-system/sw/bin/echo"
 
   # ---
-  local _echo="/run/current-system/sw/bin/echo"
 
   __i=$((${__i}+1))
   __comments[${__i}]="gen a repo and push local git"
@@ -52,18 +49,6 @@ function peco_alias() {
     else
       echo "error"
     fi
-  }
-
-  __i=$((${__i}+1))
-  __comments[${__i}]="This is test function"
-  function __callback${__i}() {
-    echo "huga1"
-  }
-
-  __i=$((${__i}+1))
-  __comments[${__i}]="This is test function2"
-  function __callback${__i}() {
-    echo "huga2"
   }
 
   # ---
