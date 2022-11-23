@@ -4,7 +4,15 @@ set -euo pipefail
 function peco_alias() {
   typeset -a __comments
   local __i=0
-  local _echo="/run/current-system/sw/bin/echo"
+
+  function __get_echo_path() {
+    if [[ $(grep '^NAME' /etc/os-release | sed "s/^NAME=//g") = "NixOS" ]]; then
+      echo "/run/current-system/sw/bin/echo"
+    else
+      echo "/bin/echo"
+    fi
+  }
+  local _echo=$(__get_echo_path)
 
   # ---
 
