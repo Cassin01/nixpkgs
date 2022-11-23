@@ -12,3 +12,4 @@ set -e -o pipefail
 ln -sf ~/.config/nixpkgs/cnf/xmobar/xmobarrc.hs ~/.config/xmobar/xmobarrc.hs
 ln -sf ~/.config/nixpkgs/cnf/xmonad/xmonad.hs ~/.config/xmonad/xmonad.hs
 ln -sf ~/.config/nixpkgs/cnf/kitty/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf ~/.config/nixpkgs/cnf/zsh/.zshrc.nixos ~/.config/zsh/.zshrc.nixos

@@ -1,0 +1,81 @@
+#!/run/current-system/sw/bin/zsh
+set -euo pipefail
+
+autoload catch
+autoload throw
+
+function peco_alias() {
+  typeset -a __comments
+  local __i=0
+
+  # ---
+  local _echo="/run/current-system/sw/bin/echo"
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="gen a repo and push local git"
+  function __callback${__i}() {
+    ${_echo} -n "Input repo name: "
+    read repo_name
+    ${_echo} -n "Input repo desc: "
+    read repo_desc
+    gh repo create ${repo_name} --private -d "${repo_desc}" --push --source ./
+  }
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="gen a repo and pull by the ghq"
+  function __callback${__i}() {
+    /bin/echo -n "Input repo name: "
+    read repo_name
+    /bin/echo -n "Input repo desc: "
+    read repo_desc
+    gh repo create ${repo_name} --private -d "${repo_desc}"
+    ghq get ${repo_name}
+    cd $(ghq list --full-path -e ${repo_name})
+  }
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="clone a repo to local"
+  function __callback${__i}() {
+    if local repo_name=$(gh repo list | awk '{print $1}' | peco); then
+      git clone "https://github.com/${repo_name}.git"
+    else
+      echo "error"
+    fi
+  }
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="clone a repo by ghq"
+  function __callback${__i}() {
+    if local repo_name=$(gh repo list | awk '{print $1}' | peco); then
+      ghq get ${repo_name}
+      cd $(ghq list --full-path -e ${repo_name})
+    else
+      echo "error"
+    fi
+  }
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="This is test function"
+  function __callback${__i}() {
+    echo "huga1"
+  }
+
+  __i=$((${__i}+1))
+  __comments[${__i}]="This is test function2"
+  function __callback${__i}() {
+    echo "huga2"
+  }
+
+  # ---
+
+  function __show() {
+    for i in {1..${#__comments}..1}; do
+      echo "${i} => ${__comments[i]}"
+    done
+  }
+
+  if local __res="$(__show | peco | cut -d' ' -f1)"; then
+    local __fn="__callback${__res}"
+    exec ${__fn}
+  fi
+}
